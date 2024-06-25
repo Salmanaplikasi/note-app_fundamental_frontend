@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Notes App in JavaScript | CodingNepal</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Iconscout Link For Icons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+</head>
+<body>
+  <add-note-button class="add-note-button">
+    <i class="uil uil-plus"></i>
+  </add-note-button>
+
+  <popup-box class="popup-box">
+    <popup class="popup">
+      <content class="content">
+        <header>
+          <p></p>
+          <i class="uil uil-times"></i>
+        </header>
+        <form id="noteForm">
+          <div class="row title">
+            <label>Title</label>
+            <input type="text" id="noteTitle" spellcheck="false">
+          </div>
+          <div class="row description">
+            <label>Description</label>
+            <textarea id="noteDescription" spellcheck="false"></textarea>
+          </div>
+          <button type="submit">Add Note</button>
+        </form>
+      </content>
+    </popup>
+  </popup-box>
+
+  <note-list class="wrapper" id="noteList"></note-list>
+
+  <script src="dummy_data.js"></script>
+  <script>
+    // Function to display notes
+    function displayNotes() {
+      const noteList = document.getElementById('noteList');
+      noteList.innerHTML = ''; // Clear previous content
+    
+      notesData.forEach(note => {
+        const noteDiv = document.createElement('div');
+        noteDiv.classList.add('note');
+        noteDiv.innerHTML = `
+          <h3>${note.title}</h3>
+          <p>${note.body}</p>
+        `;
+    
+        // Add click event listener to show details of the clicked note
+        noteDiv.addEventListener('click', () => {
+          alert(`Title: ${note.title}\nDescription: ${note.body}`);
+        });
+    
+        noteList.appendChild(noteDiv);
+      });
+    }
+    
+    // Display the initial list of notes when the page loads
+    displayNotes();
+    
+    // Toggle popup box visibility when add note button is clicked
+    document.querySelector('add-note-button').addEventListener('click', () => {
+      document.querySelector('.popup-box').classList.toggle('show-popup');
+    });
+    
+    // Close popup box when the close button is clicked
+    document.querySelector('.popup-box .uil-times').addEventListener('click', () => {
+      document.querySelector('.popup-box').classList.remove('show-popup');
+    });
+    
+    // Prevent popup box from closing when clicking inside the content area
+    document.querySelector('.popup').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    
+    // Submit form when the Enter key is pressed
+    document.getElementById('noteForm').addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent default form submission
+      addNote();
+    });
+    
+    // Function to add a new note
+    function addNote() {
+      const noteTitle = document.getElementById('noteTitle').value;
+      const noteBody = document.getElementById('noteDescription').value;
+    
+      // Check if title and body are not empty
+      if (noteTitle.trim() !== '' && noteBody.trim() !== '') {
+        // Generate a unique ID for the new note (for simplicity, you can use a library like UUID)
+        const id = 'notes-' + Math.random().toString(36).substr(2, 9);
+        const createdAt = new Date().toISOString();
+    
+        // Create a new note object
+        const newNote = {
+          id,
+          title: noteTitle,
+          body: noteBody,
+          createdAt,
+          archived: false,
+        };
+    
+        // Add the new note to the notesData array
+        notesData.push(newNote);
+    
+        // Display the updated list of notes
+        displayNotes();
+    
+        // Clear the input fields
+        document.getElementById('noteTitle').value = '';
+        document.getElementById('noteDescription').value = '';
+      } else {
+        alert('Please enter both title and body for the note.');
+      }
+    }
+  </script>
+</body>
+</html>

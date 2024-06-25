@@ -1,0 +1,150 @@
+/* Import Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #88ABFF;
+}
+
+.popup-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none; /* Sembunyikan kotak input secara default */
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-box.show-popup {
+  display: flex; /* Tampilkan kotak input saat diperlukan */
+}
+
+.popup {
+  background: #fff;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+header i {
+  cursor: pointer;
+}
+
+form .row {
+  margin-bottom: 20px;
+}
+
+form label {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6A93F8;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.wrapper {
+  margin-top: 20px;
+  display: grid;
+  gap: 20px;
+}
+
+.note {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.note p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.note span {
+  color: #888;
+  font-size: 14px;
+}
+
+.note .settings i {
+  cursor: pointer;
+}
+
+.note .settings ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.note .settings ul li {
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+}
+
+.note .settings ul li:first-child {
+  border-top: none;
+}
+
+.note .settings ul li:hover {
+  background: #f0f0f0;
+}
+
+.add-note-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #6A93F8;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.add-note-button i {
+  color: #fff;
+  font-size: 24px;
+}
